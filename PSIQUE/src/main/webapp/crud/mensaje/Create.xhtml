@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MensajeCreateDlg" widgetVar="MensajeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMensajeTitle}">
+            <h:form id="MensajeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mensajeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMensajeLabel_idMensaje}" for="idMensaje" />
+                        <p:inputText id="idMensaje" value="#{mensajeController.selected.idMensaje}" title="#{bundle.CreateMensajeTitle_idMensaje}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_idMensaje}"/>
+                        <p:outputLabel value="#{bundle.CreateMensajeLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{mensajeController.selected.fecha}" title="#{bundle.EditMensajeTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMensajeLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{mensajeController.selected.estado}" title="#{bundle.CreateMensajeTitle_estado}" />
+                        <p:outputLabel value="#{bundle.CreateMensajeLabel_mensaje}" for="mensaje" />
+                        <p:inputTextarea rows="4" cols="30" id="mensaje" value="#{mensajeController.selected.mensaje}" title="#{bundle.CreateMensajeTitle_mensaje}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_mensaje}"/>
+                        <p:outputLabel value="#{bundle.CreateMensajeLabel_asunto}" for="asunto" />
+                        <p:inputText id="asunto" value="#{mensajeController.selected.asunto}" title="#{bundle.CreateMensajeTitle_asunto}" />
+                        <p:outputLabel value="#{bundle.CreateMensajeLabel_adjunto}" for="adjunto" />
+                        <p:inputTextarea rows="4" cols="30" id="adjunto" value="#{mensajeController.selected.adjunto}" title="#{bundle.CreateMensajeTitle_adjunto}" />
+                        <p:outputLabel value="#{bundle.CreateMensajeLabel_idEmisor}" for="idEmisor" />
+                        <p:selectOneMenu id="idEmisor" value="#{mensajeController.selected.idEmisor}" >
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idEmisorItem"
+                                           itemValue="#{idEmisorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMensajeLabel_idReceptor}" for="idReceptor" />
+                        <p:selectOneMenu id="idReceptor" value="#{mensajeController.selected.idReceptor}" required="true" requiredMessage="#{bundle.EditMensajeRequiredMessage_idReceptor}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idReceptorItem"
+                                           itemValue="#{idReceptorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mensajeController.create}" value="#{bundle.Save}" update="display,:MensajeListForm:datalist,:growl" oncomplete="handleSubmit(args,'MensajeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MensajeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

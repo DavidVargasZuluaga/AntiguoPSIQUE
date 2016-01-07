@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FamiliarCreateDlg" widgetVar="FamiliarCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFamiliarTitle}">
+            <h:form id="FamiliarCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{familiarController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_idFamiliar}" for="idFamiliar" />
+                        <p:inputText id="idFamiliar" value="#{familiarController.selected.idFamiliar}" title="#{bundle.CreateFamiliarTitle_idFamiliar}" required="true" requiredMessage="#{bundle.CreateFamiliarRequiredMessage_idFamiliar}"/>
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_parentezco}" for="parentezco" />
+                        <p:inputText id="parentezco" value="#{familiarController.selected.parentezco}" title="#{bundle.CreateFamiliarTitle_parentezco}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{familiarController.selected.nombres}" title="#{bundle.CreateFamiliarTitle_nombres}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_primeroApellido}" for="primeroApellido" />
+                        <p:inputText id="primeroApellido" value="#{familiarController.selected.primeroApellido}" title="#{bundle.CreateFamiliarTitle_primeroApellido}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_seguntoApellido}" for="seguntoApellido" />
+                        <p:inputText id="seguntoApellido" value="#{familiarController.selected.seguntoApellido}" title="#{bundle.CreateFamiliarTitle_seguntoApellido}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy HH:mm:ss" value="#{familiarController.selected.fechaNacimiento}" title="#{bundle.EditFamiliarTitle_fechaNacimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_fechaDdefuncion}" for="fechaDdefuncion" />
+                        <p:calendar id="fechaDdefuncion" pattern="MM/dd/yyyy HH:mm:ss" value="#{familiarController.selected.fechaDdefuncion}" title="#{bundle.EditFamiliarTitle_fechaDdefuncion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_ubicacion}" for="ubicacion" />
+                        <p:inputText id="ubicacion" value="#{familiarController.selected.ubicacion}" title="#{bundle.CreateFamiliarTitle_ubicacion}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_sexo}" for="sexo" />
+                        <p:inputText id="sexo" value="#{familiarController.selected.sexo}" title="#{bundle.CreateFamiliarTitle_sexo}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_estadoCivil}" for="estadoCivil" />
+                        <p:inputText id="estadoCivil" value="#{familiarController.selected.estadoCivil}" title="#{bundle.CreateFamiliarTitle_estadoCivil}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_raza}" for="raza" />
+                        <p:inputText id="raza" value="#{familiarController.selected.raza}" title="#{bundle.CreateFamiliarTitle_raza}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_religion}" for="religion" />
+                        <p:inputText id="religion" value="#{familiarController.selected.religion}" title="#{bundle.CreateFamiliarTitle_religion}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_tendenciaPolitica}" for="tendenciaPolitica" />
+                        <p:inputText id="tendenciaPolitica" value="#{familiarController.selected.tendenciaPolitica}" title="#{bundle.CreateFamiliarTitle_tendenciaPolitica}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_orientacionSexual}" for="orientacionSexual" />
+                        <p:inputText id="orientacionSexual" value="#{familiarController.selected.orientacionSexual}" title="#{bundle.CreateFamiliarTitle_orientacionSexual}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_ocupacion}" for="ocupacion" />
+                        <p:inputText id="ocupacion" value="#{familiarController.selected.ocupacion}" title="#{bundle.CreateFamiliarTitle_ocupacion}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_comentario}" for="comentario" />
+                        <p:inputTextarea rows="4" cols="30" id="comentario" value="#{familiarController.selected.comentario}" title="#{bundle.CreateFamiliarTitle_comentario}" />
+                        <p:outputLabel value="#{bundle.CreateFamiliarLabel_idAprendiz}" for="idAprendiz" />
+                        <p:selectOneMenu id="idAprendiz" value="#{familiarController.selected.idAprendiz}" required="true" requiredMessage="#{bundle.EditFamiliarRequiredMessage_idAprendiz}">
+                            <f:selectItems value="#{aprendizController.itemsAvailableSelectOne}"
+                                           var="idAprendizItem"
+                                           itemValue="#{idAprendizItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{familiarController.create}" value="#{bundle.Save}" update="display,:FamiliarListForm:datalist,:growl" oncomplete="handleSubmit(args,'FamiliarCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FamiliarCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

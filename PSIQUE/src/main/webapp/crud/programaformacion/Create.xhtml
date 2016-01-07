@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProgramaformacionCreateDlg" widgetVar="ProgramaformacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateProgramaformacionTitle}">
+            <h:form id="ProgramaformacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{programaformacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateProgramaformacionLabel_idPrograma}" for="idPrograma" />
+                        <p:inputText id="idPrograma" value="#{programaformacionController.selected.idPrograma}" title="#{bundle.CreateProgramaformacionTitle_idPrograma}" required="true" requiredMessage="#{bundle.CreateProgramaformacionRequiredMessage_idPrograma}"/>
+                        <p:outputLabel value="#{bundle.CreateProgramaformacionLabel_nombrePrograma}" for="nombrePrograma" />
+                        <p:inputText id="nombrePrograma" value="#{programaformacionController.selected.nombrePrograma}" title="#{bundle.CreateProgramaformacionTitle_nombrePrograma}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{programaformacionController.create}" value="#{bundle.Save}" update="display,:ProgramaformacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProgramaformacionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProgramaformacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

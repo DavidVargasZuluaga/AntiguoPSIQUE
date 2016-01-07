@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CoordinadorCreateDlg" widgetVar="CoordinadorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCoordinadorTitle}">
+            <h:form id="CoordinadorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{coordinadorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCoordinadorLabel_idCoordinador}" for="idCoordinador" />
+                        <p:inputText id="idCoordinador" value="#{coordinadorController.selected.idCoordinador}" title="#{bundle.CreateCoordinadorTitle_idCoordinador}" required="true" requiredMessage="#{bundle.CreateCoordinadorRequiredMessage_idCoordinador}"/>
+                        <p:outputLabel value="#{bundle.CreateCoordinadorLabel_idPrograma}" for="idPrograma" />
+                        <p:selectOneMenu id="idPrograma" value="#{coordinadorController.selected.idPrograma}" >
+                            <f:selectItems value="#{programaformacionController.itemsAvailableSelectOne}"
+                                           var="idProgramaItem"
+                                           itemValue="#{idProgramaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCoordinadorLabel_usuario}" for="usuario" />
+                        <p:selectOneMenu id="usuario" value="#{coordinadorController.selected.usuario}" required="true" requiredMessage="#{bundle.EditCoordinadorRequiredMessage_usuario}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="usuarioItem"
+                                           itemValue="#{usuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{coordinadorController.create}" value="#{bundle.Save}" update="display,:CoordinadorListForm:datalist,:growl" oncomplete="handleSubmit(args,'CoordinadorCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CoordinadorCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

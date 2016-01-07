@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AprendizCreateDlg" widgetVar="AprendizCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAprendizTitle}">
+            <h:form id="AprendizCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aprendizController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_idAprendiz}" for="idAprendiz" />
+                        <p:inputText id="idAprendiz" value="#{aprendizController.selected.idAprendiz}" title="#{bundle.CreateAprendizTitle_idAprendiz}" required="true" requiredMessage="#{bundle.CreateAprendizRequiredMessage_idAprendiz}"/>
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_ubicacion}" for="ubicacion" />
+                        <p:inputText id="ubicacion" value="#{aprendizController.selected.ubicacion}" title="#{bundle.CreateAprendizTitle_ubicacion}" />
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_sexo}" for="sexo" />
+                        <p:inputText id="sexo" value="#{aprendizController.selected.sexo}" title="#{bundle.CreateAprendizTitle_sexo}" />
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_estadoCivil}" for="estadoCivil" />
+                        <p:inputText id="estadoCivil" value="#{aprendizController.selected.estadoCivil}" title="#{bundle.CreateAprendizTitle_estadoCivil}" />
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_raza}" for="raza" />
+                        <p:inputText id="raza" value="#{aprendizController.selected.raza}" title="#{bundle.CreateAprendizTitle_raza}" />
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_religion}" for="religion" />
+                        <p:inputText id="religion" value="#{aprendizController.selected.religion}" title="#{bundle.CreateAprendizTitle_religion}" />
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_tendenciaPolitica}" for="tendenciaPolitica" />
+                        <p:inputText id="tendenciaPolitica" value="#{aprendizController.selected.tendenciaPolitica}" title="#{bundle.CreateAprendizTitle_tendenciaPolitica}" />
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_orientacionSexual}" for="orientacionSexual" />
+                        <p:inputText id="orientacionSexual" value="#{aprendizController.selected.orientacionSexual}" title="#{bundle.CreateAprendizTitle_orientacionSexual}" />
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_pasaTiempo}" for="pasaTiempo" />
+                        <p:inputText id="pasaTiempo" value="#{aprendizController.selected.pasaTiempo}" title="#{bundle.CreateAprendizTitle_pasaTiempo}" />
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_ficha}" for="ficha" />
+                        <p:selectOneMenu id="ficha" value="#{aprendizController.selected.ficha}" >
+                            <f:selectItems value="#{fichaController.itemsAvailableSelectOne}"
+                                           var="fichaItem"
+                                           itemValue="#{fichaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAprendizLabel_usuario}" for="usuario" />
+                        <p:selectOneMenu id="usuario" value="#{aprendizController.selected.usuario}" required="true" requiredMessage="#{bundle.EditAprendizRequiredMessage_usuario}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="usuarioItem"
+                                           itemValue="#{usuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{aprendizController.create}" value="#{bundle.Save}" update="display,:AprendizListForm:datalist,:growl" oncomplete="handleSubmit(args,'AprendizCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AprendizCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

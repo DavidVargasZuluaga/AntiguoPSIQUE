@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PsicologoCreateDlg" widgetVar="PsicologoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePsicologoTitle}">
+            <h:form id="PsicologoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{psicologoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePsicologoLabel_idPsicologo}" for="idPsicologo" />
+                        <p:inputText id="idPsicologo" value="#{psicologoController.selected.idPsicologo}" title="#{bundle.CreatePsicologoTitle_idPsicologo}" required="true" requiredMessage="#{bundle.CreatePsicologoRequiredMessage_idPsicologo}"/>
+                        <p:outputLabel value="#{bundle.CreatePsicologoLabel_jornada}" for="jornada" />
+                        <p:inputText id="jornada" value="#{psicologoController.selected.jornada}" title="#{bundle.CreatePsicologoTitle_jornada}" />
+                        <p:outputLabel value="#{bundle.CreatePsicologoLabel_usuario}" for="usuario" />
+                        <p:selectOneMenu id="usuario" value="#{psicologoController.selected.usuario}" required="true" requiredMessage="#{bundle.EditPsicologoRequiredMessage_usuario}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="usuarioItem"
+                                           itemValue="#{usuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{psicologoController.create}" value="#{bundle.Save}" update="display,:PsicologoListForm:datalist,:growl" oncomplete="handleSubmit(args,'PsicologoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PsicologoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

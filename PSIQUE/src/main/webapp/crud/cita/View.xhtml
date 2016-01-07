@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CitaViewDlg" widgetVar="CitaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCitaTitle}">
+            <h:form id="CitaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{citaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCitaLabel_idCita}"/>
+                        <h:outputText value="#{citaController.selected.idCita}" title="#{bundle.ViewCitaTitle_idCita}"/>
+                        <h:outputText value="#{bundle.ViewCitaLabel_valoracion}"/>
+                        <h:outputText value="#{citaController.selected.valoracion}" title="#{bundle.ViewCitaTitle_valoracion}"/>
+                        <h:outputText value="#{bundle.ViewCitaLabel_fecha}"/>
+                        <h:outputText value="#{citaController.selected.fecha}" title="#{bundle.ViewCitaTitle_fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCitaLabel_observacion}"/>
+                        <h:outputText value="#{citaController.selected.observacion}" title="#{bundle.ViewCitaTitle_observacion}"/>
+                        <h:outputText value="#{bundle.ViewCitaLabel_estado}"/>
+                        <h:outputText value="#{citaController.selected.estado}" title="#{bundle.ViewCitaTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewCitaLabel_idAprendiz}"/>
+                        <h:outputText value="#{citaController.selected.idAprendiz}" title="#{bundle.ViewCitaTitle_idAprendiz}"/>
+                        <h:outputText value="#{bundle.ViewCitaLabel_idPsicologo}"/>
+                        <h:outputText value="#{citaController.selected.idPsicologo}" title="#{bundle.ViewCitaTitle_idPsicologo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CitaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

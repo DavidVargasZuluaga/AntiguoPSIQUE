@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NotificacionCreateDlg" widgetVar="NotificacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateNotificacionTitle}">
+            <h:form id="NotificacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{notificacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNotificacionLabel_idNotificacion}" for="idNotificacion" />
+                        <p:inputText id="idNotificacion" value="#{notificacionController.selected.idNotificacion}" title="#{bundle.CreateNotificacionTitle_idNotificacion}" required="true" requiredMessage="#{bundle.CreateNotificacionRequiredMessage_idNotificacion}"/>
+                        <p:outputLabel value="#{bundle.CreateNotificacionLabel_notificacion}" for="notificacion" />
+                        <p:inputText id="notificacion" value="#{notificacionController.selected.notificacion}" title="#{bundle.CreateNotificacionTitle_notificacion}" />
+                        <p:outputLabel value="#{bundle.CreateNotificacionLabel_tipo}" for="tipo" />
+                        <p:inputText id="tipo" value="#{notificacionController.selected.tipo}" title="#{bundle.CreateNotificacionTitle_tipo}" />
+                        <p:outputLabel value="#{bundle.CreateNotificacionLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{notificacionController.selected.fecha}" title="#{bundle.EditNotificacionTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateNotificacionLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{notificacionController.selected.idUsuario}" required="true" requiredMessage="#{bundle.EditNotificacionRequiredMessage_idUsuario}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{notificacionController.create}" value="#{bundle.Save}" update="display,:NotificacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'NotificacionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NotificacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

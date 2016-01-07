@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TestCreateDlg" widgetVar="TestCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTestTitle}">
+            <h:form id="TestCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{testController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTestLabel_idTest}" for="idTest" />
+                        <p:inputText id="idTest" value="#{testController.selected.idTest}" title="#{bundle.CreateTestTitle_idTest}" required="true" requiredMessage="#{bundle.CreateTestRequiredMessage_idTest}"/>
+                        <p:outputLabel value="#{bundle.CreateTestLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{testController.selected.nombre}" title="#{bundle.CreateTestTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateTestLabel_resultado}" for="resultado" />
+                        <p:inputText id="resultado" value="#{testController.selected.resultado}" title="#{bundle.CreateTestTitle_resultado}" />
+                        <p:outputLabel value="#{bundle.CreateTestLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{testController.selected.fecha}" title="#{bundle.EditTestTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTestLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{testController.selected.estado}" title="#{bundle.CreateTestTitle_estado}" />
+                        <p:outputLabel value="#{bundle.CreateTestLabel_idAprendiz}" for="idAprendiz" />
+                        <p:selectOneMenu id="idAprendiz" value="#{testController.selected.idAprendiz}" >
+                            <f:selectItems value="#{aprendizController.itemsAvailableSelectOne}"
+                                           var="idAprendizItem"
+                                           itemValue="#{idAprendizItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{testController.create}" value="#{bundle.Save}" update="display,:TestListForm:datalist,:growl" oncomplete="handleSubmit(args,'TestCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TestCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

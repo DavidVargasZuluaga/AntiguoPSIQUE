@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MensajeEditDlg" widgetVar="MensajeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMensajeTitle}">
+            <h:form id="MensajeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mensajeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMensajeLabel_idMensaje}" for="idMensaje" />
+                        <p:inputText id="idMensaje" value="#{mensajeController.selected.idMensaje}" title="#{bundle.EditMensajeTitle_idMensaje}" required="true" requiredMessage="#{bundle.EditMensajeRequiredMessage_idMensaje}"/>
+                        <p:outputLabel value="#{bundle.EditMensajeLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{mensajeController.selected.fecha}" title="#{bundle.EditMensajeTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMensajeLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{mensajeController.selected.estado}" title="#{bundle.EditMensajeTitle_estado}" />
+                        <p:outputLabel value="#{bundle.EditMensajeLabel_mensaje}" for="mensaje" />
+                        <p:inputTextarea rows="4" cols="30" id="mensaje" value="#{mensajeController.selected.mensaje}" title="#{bundle.EditMensajeTitle_mensaje}" required="true" requiredMessage="#{bundle.EditMensajeRequiredMessage_mensaje}"/>
+                        <p:outputLabel value="#{bundle.EditMensajeLabel_asunto}" for="asunto" />
+                        <p:inputText id="asunto" value="#{mensajeController.selected.asunto}" title="#{bundle.EditMensajeTitle_asunto}" />
+                        <p:outputLabel value="#{bundle.EditMensajeLabel_adjunto}" for="adjunto" />
+                        <p:inputTextarea rows="4" cols="30" id="adjunto" value="#{mensajeController.selected.adjunto}" title="#{bundle.EditMensajeTitle_adjunto}" />
+                        <p:outputLabel value="#{bundle.EditMensajeLabel_idEmisor}" for="idEmisor" />
+                        <p:selectOneMenu id="idEmisor" value="#{mensajeController.selected.idEmisor}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idEmisorItem"
+                                           itemValue="#{idEmisorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMensajeLabel_idReceptor}" for="idReceptor" />
+                        <p:selectOneMenu id="idReceptor" value="#{mensajeController.selected.idReceptor}" required="true" requiredMessage="#{bundle.EditMensajeRequiredMessage_idReceptor}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idReceptorItem"
+                                           itemValue="#{idReceptorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mensajeController.update}" value="#{bundle.Save}" update="display,:MensajeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MensajeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MensajeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

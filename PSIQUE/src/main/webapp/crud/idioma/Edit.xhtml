@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IdiomaEditDlg" widgetVar="IdiomaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIdiomaTitle}">
+            <h:form id="IdiomaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{idiomaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIdiomaLabel_idIdioma}" for="idIdioma" />
+                        <p:inputText id="idIdioma" value="#{idiomaController.selected.idIdioma}" title="#{bundle.EditIdiomaTitle_idIdioma}" required="true" requiredMessage="#{bundle.EditIdiomaRequiredMessage_idIdioma}"/>
+                        <p:outputLabel value="#{bundle.EditIdiomaLabel_palabra}" for="palabra" />
+                        <p:inputText id="palabra" value="#{idiomaController.selected.palabra}" title="#{bundle.EditIdiomaTitle_palabra}" required="true" requiredMessage="#{bundle.EditIdiomaRequiredMessage_palabra}"/>
+                        <p:outputLabel value="#{bundle.EditIdiomaLabel_abreviatura}" for="abreviatura" />
+                        <p:inputText id="abreviatura" value="#{idiomaController.selected.abreviatura}" title="#{bundle.EditIdiomaTitle_abreviatura}" />
+                        <p:outputLabel value="#{bundle.EditIdiomaLabel_idioma}" for="idioma" />
+                        <p:inputText id="idioma" value="#{idiomaController.selected.idioma}" title="#{bundle.EditIdiomaTitle_idioma}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{idiomaController.update}" value="#{bundle.Save}" update="display,:IdiomaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IdiomaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IdiomaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

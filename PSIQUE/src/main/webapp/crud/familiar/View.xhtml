@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FamiliarViewDlg" widgetVar="FamiliarViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFamiliarTitle}">
+            <h:form id="FamiliarViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{familiarController.selected != null}">
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_idFamiliar}"/>
+                        <h:outputText value="#{familiarController.selected.idFamiliar}" title="#{bundle.ViewFamiliarTitle_idFamiliar}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_parentezco}"/>
+                        <h:outputText value="#{familiarController.selected.parentezco}" title="#{bundle.ViewFamiliarTitle_parentezco}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_nombres}"/>
+                        <h:outputText value="#{familiarController.selected.nombres}" title="#{bundle.ViewFamiliarTitle_nombres}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_primeroApellido}"/>
+                        <h:outputText value="#{familiarController.selected.primeroApellido}" title="#{bundle.ViewFamiliarTitle_primeroApellido}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_seguntoApellido}"/>
+                        <h:outputText value="#{familiarController.selected.seguntoApellido}" title="#{bundle.ViewFamiliarTitle_seguntoApellido}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_fechaNacimiento}"/>
+                        <h:outputText value="#{familiarController.selected.fechaNacimiento}" title="#{bundle.ViewFamiliarTitle_fechaNacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_fechaDdefuncion}"/>
+                        <h:outputText value="#{familiarController.selected.fechaDdefuncion}" title="#{bundle.ViewFamiliarTitle_fechaDdefuncion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_ubicacion}"/>
+                        <h:outputText value="#{familiarController.selected.ubicacion}" title="#{bundle.ViewFamiliarTitle_ubicacion}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_sexo}"/>
+                        <h:outputText value="#{familiarController.selected.sexo}" title="#{bundle.ViewFamiliarTitle_sexo}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_estadoCivil}"/>
+                        <h:outputText value="#{familiarController.selected.estadoCivil}" title="#{bundle.ViewFamiliarTitle_estadoCivil}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_raza}"/>
+                        <h:outputText value="#{familiarController.selected.raza}" title="#{bundle.ViewFamiliarTitle_raza}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_religion}"/>
+                        <h:outputText value="#{familiarController.selected.religion}" title="#{bundle.ViewFamiliarTitle_religion}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_tendenciaPolitica}"/>
+                        <h:outputText value="#{familiarController.selected.tendenciaPolitica}" title="#{bundle.ViewFamiliarTitle_tendenciaPolitica}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_orientacionSexual}"/>
+                        <h:outputText value="#{familiarController.selected.orientacionSexual}" title="#{bundle.ViewFamiliarTitle_orientacionSexual}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_ocupacion}"/>
+                        <h:outputText value="#{familiarController.selected.ocupacion}" title="#{bundle.ViewFamiliarTitle_ocupacion}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_comentario}"/>
+                        <h:outputText value="#{familiarController.selected.comentario}" title="#{bundle.ViewFamiliarTitle_comentario}"/>
+                        <h:outputText value="#{bundle.ViewFamiliarLabel_idAprendiz}"/>
+                        <h:outputText value="#{familiarController.selected.idAprendiz}" title="#{bundle.ViewFamiliarTitle_idAprendiz}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="FamiliarViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
