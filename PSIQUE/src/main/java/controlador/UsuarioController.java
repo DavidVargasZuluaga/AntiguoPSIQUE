@@ -1,19 +1,21 @@
 package controlador;
 
-import modelo.Usuario;
+import modelo.*;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import fachada.UsuarioFacade;
+import fachada.*;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -24,11 +26,37 @@ import javax.faces.convert.FacesConverter;
 public class UsuarioController implements Serializable {
 
     @EJB
-    private fachada.UsuarioFacade ejbFacade;
+    private UsuarioFacade ejbFacade;
     private List<Usuario> items = null;
     private Usuario selected;
+    private Usuario usuario = null;
 
-    public UsuarioController() {
+    @PostConstruct
+    public void init(){
+        selected = new Usuario();
+        usuario = new Usuario();
+    }
+    
+    public String autenticar(){
+        Usuario us;
+        String res=null;
+        try {
+            us = ejbFacade.autenticar(usuario);
+            this.usuario = us ;
+            if(us!=null){
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",us);
+                if(us.getIdRol().getIdRol()==1){
+                    res = "modUsuario/principalAdmon.xhtml";
+                }else{
+                    res = "modUsuario/principalUsuario.xhtml";
+                }
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Error","Validacion incorrecta"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
     public Usuario getSelected() {
@@ -121,6 +149,14 @@ public class UsuarioController implements Serializable {
         return getFacade().findAll();
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
     @FacesConverter(forClass = Usuario.class)
     public static class UsuarioControllerConverter implements Converter {
 

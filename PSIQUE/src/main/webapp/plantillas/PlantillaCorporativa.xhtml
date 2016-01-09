@@ -90,17 +90,17 @@
                         <h:form class="form-group">
                             <div class="form-group">
                                 <h:outputLabel value="Documento de identidad" class="control-label" style="font-weight:bold" for="ide"/>
-                                <h:inputText class="form-control" value="op" tabindex="1" required="true" />
+                                <h:inputText class="form-control" value="#{usuarioController.usuario.idUsuario}" tabindex="1" required="true" />
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Contraseña" class="control-label" style="font-weight:bold" for="clave"/>
-                                <h:inputSecret id="clave" class="form-control"  value="sdf}" tabindex="2" required="true" />
+                                <h:inputSecret id="clave" class="form-control"  value="#{usuarioController.usuario.clave}" tabindex="2" required="true" />
                             </div>
                             <div class="form-group" tabindex="3">
                                 <h:commandLink style="font-weight:bold; color: #23527c" action="modUsuario/recuperarContraseña.html" value="¿Olvidaste tu contraseña?"/>
                             </div>
                             <div class="form-group col-xs-6 col-sm-6 col-md-6">
-                                <h:commandButton class="btn btn-block botones" value="Entrar" tabindex="4"/>
+                                <h:commandButton class="btn btn-block botones" value="Entrar" action="#{usuarioController.autenticar()}" tabindex="4"/>
                             </div>
                             <div class="form-group col-xs-6 col-sm-6 col-md-6">
                                 <h:form>
