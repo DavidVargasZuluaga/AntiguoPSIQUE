@@ -20,7 +20,7 @@ section{
 }
 .color3{
 	color:#9F3603!important; 
-	font-style:black;
+	font-style: black;
 }
 .tfooter{
 	text-align:center;
@@ -70,16 +70,16 @@ section{
 	color:#235545;
 }
 .marcagua{
-	background-image:url(../img/mAgua.png);
+	background-image:url(../resources/img/mAgua.png);
 }
 .marcaguaA{
-	background-image:url(../img/mAguaA.png);
+	background-image:url(../resources/img/mAguaA.png);
 }
 .marcaguaAd{
-	background-image:url(../img/mAguaAd.png);
+	background-image:url(../resources/img/mAguaAd.png);
 }
 .marcaguaP{
-	background-image:url(../img/mAguaP.png);
+	background-image:url(../resources/img/mAguaP.png);
 }
 
 .fasdfasd{
@@ -91,7 +91,7 @@ section{
 	color: white;
 }
 .trans2{
-	opacity: 0.9;
+	opacity: 0.93;
 	background-color:white;
         color:#238676;
 }
