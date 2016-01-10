@@ -8,15 +8,14 @@
     <ui:composition template="./../plantillas/PlantillaAdministrador.xhtml">
 
         <ui:define name="body">
-            <br/>
-            <br/><br/><br/>
-            <div class="container ">
+            <br/><br/><br/><br/>
+            <div class="container">
                 <div class="row profile col-xs-12 col-sm-6 col-md-3">
                     <div class="container-fluid">
                         <div class="color1 profile-sidebar control-group">
                             <!-- SIDEBAR USERPIC -->
                             <div class="profile-userpic btn-group-lg centrar"> 
-                                <h:graphicImage style="max-width: 180px;" value="/resources/img/perfil/pAd.jpg" class="img-responsive img-circle centrar" alt=""/> 
+                                <h:graphicImage style="max-width: 180px;" value="../resources/img/perfil/pAd.jpg" class="img-responsive img-circle centrar" alt=""/> 
                             </div><br/>
                             <div class="profile-userpic btn-block">
                                 <h:button class="btn botonesinv btn-block" value="Cambiar foto"/>
@@ -47,56 +46,52 @@
                     </div>
                 </div>
 
-                <div class="profile-content col-xs-12 col-sm-5 col-md-6 " >
+                <div class="profile-content col-xs-12 col-sm-6 col-md-7">
                     <div class="container-fluid">
-                        <h:form class=" form-horizontal" id="formregistro" >
-                            <legend>Mi perfil</legend>
+                        <h:form class="form-horizontal" id="formregistro" >
+                            <legend>Editar perfil</legend>
                             <div class="container-fluid">
                                 <div class="control-group">
                                     <h:outputLabel class="control-label" for="ide" value="Documento de identidad"/>
                                     <br/>
-                                    <h:outputLabel class="form-control" style="color: black;" value="#{usuarioController.usuario.idUsuario}"/>
+                                    <h:outputText class="control-label" style="color: black;" value="#{usuarioController.usuario.idUsuario}"/>
                                 </div>
-                                <br/>
                                 <div class="control-group">
                                     <h:outputLabel class="control-label" for="ide" value="Nombre"/>
                                     <br/>
-                                    <h:outputLabel class="control-label" style="color: black;" value="#{usuarioController.usuario.nombres}"/>
+                                    <h:outputText class="control-label" style="color: black;" value="#{usuarioController.usuario.nombres}"/>
                                 </div>
-                                <br/>
                                 <div class="control-group">
                                     <h:outputLabel class="control-label" for="ide" value="Primer Apellido"/>
                                     <br/>
-                                    <h:outputLabel class="control-label"  style="color: black;" value="#{usuarioController.usuario.primerApellido}"/>
+                                    <h:outputText class="control-label"  style="color: black;" value="#{usuarioController.usuario.primerApellido}"/>
                                 </div>
-                                <br/>
                                 <div class="control-group">
                                     <h:outputLabel class="control-label" for="ide" value="Segundo Apellido"/>
                                     <br/>
-                                    <h:outputLabel class="control-label" style="color: black;" value="#{usuarioController.usuario.segundoApellido}"/>
+                                    <h:outputText class="control-label" style="color: black;" value="#{usuarioController.usuario.segundoApellido}"/>
                                 </div>
-                                <br/>
-                                <div class="control-group">
-                                    <h:outputLabel class="control-label" for="ide" value="Correo electronico"/>
-                                    <br/>
-                                    <h:outputLabel class="control-label" style="color: black;" value="#{usuarioController.usuario.correo}"/>
-                                </div>
-                                <br/>
                                 <div class="control-group">
                                     <h:outputLabel class="control-label" for="ide" value="Fecha de nacimiento"/>
                                     <br/>
-                                    <h:outputLabel class="control-label " style="color: black;" value="#{usuarioController.usuario.fechaNacimiento}"/>
+                                    <h:outputText class="control-label " style="color: black;" value="#{usuarioController.usuario.fechaNacimiento}"/>
+                                </div>
+                                <hr/>
+                                <div class="control-group">
+                                    <h:outputLabel class="control-label" for="ide" value="Correo electronico"/>
+                                    <br/>
+                                    <h:inputText class="form-control" style="color: black;" value="#{usuarioController.usuario.correo}"/>
                                 </div>
                                 <br/>
-                                <div class="control-group">
+                                <div class="control-group ">
                                     <h:outputLabel class="control-label" for="ide" value="Telefono"/>
                                     <br/>
-                                    <h:outputLabel class="control-label" style="color: black;" value="#{usuarioController.usuario.telefono}"/>
+                                    <h:inputText class="form-control" value="#{usuarioController.usuario.telefono}"/>
                                 </div>
                                 <br/>
                                 <br/>
                                 <div class="control-group">
-                                    <h:commandButton action="editarPerfilAdmon.xhtml" type="submit" class="btn btn-block botones" value="Editar datos"/>
+                                    <h:commandButton actionListener="#{usuarioController.update}" id="btnvalidar" type="submit" class="btn btn-block botones" value="Editar datos"/>
                                 </div>
                             </div>
                         </h:form>
@@ -106,3 +101,4 @@
         </ui:define>
     </ui:composition>
 </html>
+

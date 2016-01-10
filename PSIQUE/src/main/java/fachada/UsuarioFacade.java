@@ -30,6 +30,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
     
+    
     public Usuario autenticar(Usuario us){
         Usuario usuario = null;
         String consulta;

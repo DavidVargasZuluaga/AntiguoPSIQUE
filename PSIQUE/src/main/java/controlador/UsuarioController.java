@@ -51,12 +51,37 @@ public class UsuarioController implements Serializable {
                     res = "modUsuario/principalUsuario.xhtml";
                 }
             }else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Error","Validacion incorrecta"));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Credenciales incorrectos","Intentelo de nuevo"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Alerta","Error de validacion"));
         }
         return res;
+    }
+    
+    public void verificarSesion(){
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Usuario usua ;
+            usua = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+            if(usua == null){
+                context.getExternalContext().redirect("./../permisos.xhtml");
+                
+            }
+        } catch (Exception e) {
+            
+        }
+    }
+    
+     public Usuario getUsuario() {
+         if(usuario==null){
+             usuario = new Usuario();
+         }
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Usuario getSelected() {
@@ -149,13 +174,7 @@ public class UsuarioController implements Serializable {
         return getFacade().findAll();
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+   
     
     @FacesConverter(forClass = Usuario.class)
     public static class UsuarioControllerConverter implements Converter {

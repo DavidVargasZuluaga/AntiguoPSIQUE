@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="./../plantillas/PlantillaAdministrador.xhtml">
+        <ui:define name="body">
+            <br/>
+            <br/><br/><br/>
+            <p:messages autoUpdate="true"/>
+            <h:form  id="form">
+                <p:dataTable value="#{usuarioController.listaAprendices}" 
+                             var="item" 
+                             id="apren"
+                             selectionMode="single" 
+                             selection="#{usuarioController.selected}"
+                             paginator="true"
+                             rowKey="#{item.idUsuario}"
+                             rows="10"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}" 
+                             rowsPerPageTemplate="10,20,30,40,50" 
+                             style="font-size: 12px;" 
+                             widgetVar="apre"
+                             emptyMessage="No hay resultados"
+                             filteredValue="#{usuarioController.listaA}"
+                             >
+
+                    <f:facet name="header">
+                        <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                        <p:columnToggler datasource="apren" trigger="toggler" />
+                        <h:commandLink>
+                            <img src="../resources/img/excel.png" width="24"/>
+                            <p:dataExporter pageOnly="true" type="xls" target="apren" fileName="listaAprendices" />
+                        </h:commandLink>
+                        <h:commandLink>
+                            <img src="../resources/img/pdf.png" width="24"/>
+                            <p:dataExporter pageOnly="true"  type="pdf" target="apren" fileName="listaAprendices"/>
+                        </h:commandLink>
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" listener="#{dtSelectionView.onRowUnselect}" />
+                    <p:ajax event="rowUnselect" listener="#{dtSelectionView.onRowUnselect}" />
+
+                    <p:column sortBy="#{item.idUsuario}" style="font-size: 11px;" headerText="No. Documento" filterBy="#{item.idUsuario}" filterMatchMode="contains">
+                        <h:outputText value="#{item.idUsuario}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.correo}" style="font-size: 11px;" headerText="Correo" filterBy="#{item.correo}" filterMatchMode="contains">
+                        <h:outputText value="#{item.correo}" />
+                    </p:column>
+                    <p:column sortBy="#{item.nombres}" style="font-size: 11px;" headerText="Nombres" filterBy="#{item.nombres}" filterMatchMode="contains">
+                        <h:outputText value="#{item.nombres}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.primerApellido}" style="font-size: 11px;" headerText="Primer Apellido" filterBy="#{item.primerApellido}" filterMatchMode="contains">
+                        <h:outputText value="#{item.primerApellido}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.segundoApellido}" style="font-size: 11px;" headerText="Segundo Apellido" filterBy="#{item.segundoApellido}" filterMatchMode="contains">
+                        <h:outputText value="#{item.segundoApellido}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.fechaNacimiento}" style="font-size:11px;width:50px;text-align:center;" headerText="Estado" >
+                        <p:selectBooleanCheckbox value="#{iteDm.estado}" disabled="true"/>
+                    </p:column>
+                    <p:column style="font-size: 10px;" headerText="Fecha de Nacimiento" filterBy="#{item.fechaNacimiento}" filterMatchMode="contains">
+                        <h:outputText value="#{item.fechaNacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.telefono}" style="font-size: 11px;" headerText="Telefono" filterBy="#{item.telefono}">
+                        <h:outputText value="#{item.telefono}"/>
+                    </p:column>
+                    <p:column style="font-size:10px;width:50px;text-align:center;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUsuarioTitle_idRol}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idRol}"/>
+                    </p:column>
+                    <p:column style="width:50px;text-align: center">
+                        <p:commandButton icon="ui-icon-search" action="editarUsuario.xhtml"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

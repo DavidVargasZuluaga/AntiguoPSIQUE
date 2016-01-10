@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="./../plantillas/PlantillaAdministrador.xhtml">
+
+        <ui:define name="body">
+            <br/>
+            <br/><br/><br/>
+            <div class="container ">
+                <div class="row profile col-xs-12 col-sm-6 col-md-3">
+                    <div class="container-fluid">
+                        <div class="color1 profile-sidebar control-group">
+                            <!-- SIDEBAR USERPIC -->
+                            <div class="profile-userpic btn-group-lg centrar"> 
+                                <h:graphicImage style="max-width: 180px;" value="../resources/img/perfil/pAd.jpg" class="img-responsive img-circle centrar" alt=""/> 
+                            </div><br/>
+                            <div class="profile-userpic btn-block">
+                                <h:button class="btn botonesinv btn-block" value="Cambiar foto"/>
+                            </div>
+                            <hr/>
+                            <!-- END SIDEBAR USERPIC -->
+                            <!-- SIDEBAR USER TITLE -->
+                            <div class="profile-usertitle centrar center-block">
+                                <h:outputLabel class="profile-usertitle-name centrar" value="#{usuarioController.usuario.nombres} &nbsp;"/>
+                                <h:outputLabel class="profile-usertitle-name centrar" value=" #{usuarioController.usuario.primerApellido} &nbsp; "/>
+                                <h:outputLabel class="profile-usertitle-name centrar" value=" #{usuarioController.usuario.segundoApellido} &nbsp; "/>
+                                <br/> 
+                                <h:outputLabel class="profile-usertitle-job centrar" value="Administrador"/>
+                            </div>
+                            <br/>
+                            <!-- END SIDEBAR USER TITLE -->
+                            <!-- SIDEBAR BUTTONS -->
+                            <!-- SIDEBAR MENU -->
+                            <div class="panel panel-default color1">
+                                <ul class="nav color1">
+                                    <li class="active color1"><h:link value="Mi Perfil" outcome="/modUsuario/principalAdmon.xhtml"/></li>
+                                    <li> <h:link value="Mensajeria" outcome="/modUsuario/principalAdmon.xhtml"/></li>
+                                    <li> <h:link value="Ayuda" outcome="/modUsuario/principalAdmon.xhtml"/></li>
+                                </ul>
+                            </div>
+                            <!-- END MENU -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-content col-xs-12 col-sm-5 col-md-8 " >
+                    <div class="container-fluid">
+                        <h:form class=" form-horizontal" >
+                            <legend>Notificaciones</legend>
+                            <div class="container-fluid">
+                                <h3>Auditorias a tablas</h3>
+                                <p:dataTable value="#{auditoriaController.items}"
+                                             tableStyleClass="table table-no-bordered table-responsive"
+                                             class="table  table-responsive"
+                                             var="itemp"
+                                             paginator="true"
+                                             rowKey="#{item.idAuditoria}"
+                                             rows="5"
+                                             rowsPerPageTemplate="5,10,15,20" 
+                                             style="font-size: 12px;" 
+                                             widgetVar="apre"
+                                             emptyMessage="No hay resultados"
+                                             >
+                                    <p:column sortBy="#{itemp.accion}" style="font-size: 11px;" headerText="Accion">
+                                        <h:outputText value="#{itemp.accion}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{itemp.tabla}" style="font-size: 11px;" headerText="Tabla">
+                                        <h:outputText value="#{itemp.tabla}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{itemp.fecha}" style="font-size: 11px;" headerText="Fecha">
+                                        <h:outputText value="#{itemp.fecha}"/>
+                                    </p:column>
+                                </p:dataTable>
+                                <hr/>
+                                <h3>Auditorias de ingreso</h3>
+                                <p:dataTable value="#{entradaController.items}"
+                                             tableStyleClass="table table-no-bordered table-responsive"
+                                             class="table  table-responsive"
+                                             var="item" 
+                                             id="apren"
+                                             paginator="true"
+                                             rowKey="#{item.idEntrada}"
+                                             rows="5"
+                                             rowsPerPageTemplate="5,10,15,20" 
+                                             style="font-size: 12px;" 
+                                             widgetVar="apre"
+                                             emptyMessage="No hay resultados"
+                                             >
+                                    <p:column sortBy="#{item.accion}" style="font-size: 11px;" headerText="Accion">
+                                        <h:outputText value="#{item.accion}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.idUsuario.idUsuario}" style="font-size: 11px;" headerText="Id Usuario">
+                                        <h:outputText value="#{item.idUsuario}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.idUsuario.idRol.nombre}" style="font-size: 11px;" headerText="Rol">
+                                        <h:outputText value="#{item.idUsuario.idRol.nombre}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.fecha}" style="font-size: 11px;" headerText="Fecha">
+                                        <h:outputText value="#{item.fecha}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

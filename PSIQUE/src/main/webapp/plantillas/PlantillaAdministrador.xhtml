@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        <h:outputStylesheet library="css" name="bootstrap-social.css"/>
+        <h:outputStylesheet name="css/font-awesome.css"/>
+
+        <h:outputScript library="js" name="jquery-1.9.1.js" target="head"/>
+        <h:outputScript library="js" name="jquery.validate.js" target="head"/>
+        <h:outputScript library="js" name="additional-methods.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap.min.js" target="head"/>
+
+        <f:event type="preRenderView" listener="#{usuarioController.verificarSesion()}"/>
+        
+        <title>Plantilla del Administrador</title>
+        
+    </h:head>
+    <h:body class="marcaguaAd">
+        
+        <header class="">
+            <h:form>
+                <nav class="trans2 navbar-fixed-top">
+                    <div class="container ">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed " data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" >
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar color2"></span>
+                                <span class="icon-bar color2" ></span>
+                                <span class="icon-bar color2"></span>
+                            </button>
+                            <a class="navbar-brand botonesnav" href="#">Administrador</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><p:link outcome="/modUsuario/principalAdmon.xhtml" value="Principal"/></li>
+                                <li class="dropdown">
+                                    <a class="botonesnav dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a><strong>Editar</strong></a></li>
+                                        <li><p:link outcome="/modUsuario/crudAprendices.xhtml" value="Aprendices"/></li>
+                                        <li><p:link outcome="/modUsuario/crudPsicologos.xhtml" value="Psicologos"/></li>
+                                        <li><p:link outcome="/modUsuario/crudCoordinadores.xhtml" value="Coordinadores"/></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a><strong>Crear</strong></a></li>
+                                        <li><p:link outcome="/modUsuario/crearUsuario.xhtml" value="Usuario"/></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><p:link outcome="/modUsuario/crudAdmon.xhtml" value="Super Admon"/></li>
+                                        <li role="separator" class="divider"></li>						
+                                    </ul>
+                                </li>
+                                <li><p:link value="Notificaciones"/></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                            <li><p:link outcome="/index.xhtml" class="botonesnav" value="Cerrar Sesion"/></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right img-rounded ">
+                                <h:graphicImage class="imgdere" alt="Brand" value="/resources/img/ojo64.png"/>
+                            </ul>					
+                        </div>
+                    </div>
+                </nav>
+            </h:form>
+        </header>
+        <div class="container trans2">
+
+            <div id="content" class="center_content">
+                <ui:insert name="body"></ui:insert>
+            </div>
+
+            <div id="bottom" class="color1 row">
+                <div class="centrar container tfooter col-md-12">
+                    <hr/>
+                    <h4>CopyRigth © 2015 | PSIQUE Todos los derechos reservados
+                        <br/>
+                        Sistema de Información para el Seguimiento Psicológico del Aprendiz.   
+                        <br/>
+                        <small>PSIQUE 1.0</small>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </h:body>
+
+</html>

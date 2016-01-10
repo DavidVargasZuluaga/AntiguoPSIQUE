@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../plantillas/PlantillaAdministrador.xhtml">
+    <ui:define name="body">
+
+        <div class="container-fluid">
+            <div class="color1 profile-sidebar control-group">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic btn-group-lg centrar"> 
+                    <h:graphicImage style="max-width: 180px;" value="../resources/img/perfil/pAd.jpg" class="img-responsive img-circle centrar" alt=""/> 
+                </div><br/>
+                <div class="profile-userpic btn-block">
+                    <h:button class="btn botonesinv btn-block" value="Cambiar foto"/>
+                </div>
+                <hr/>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle centrar center-block">
+                    <h:outputLabel class="profile-usertitle-name centrar" value="#{usuarioController.selected.nombres} &nbsp;"/>
+                    <h:outputLabel class="profile-usertitle-name centrar" value=" #{usuarioController.selected.primerApellido} &nbsp; "/>
+                    <h:outputLabel class="profile-usertitle-name centrar" value=" #{usuarioController.selected.segundoApellido} &nbsp; "/>
+                    <br/> 
+                    <h:outputLabel class="profile-usertitle-job centrar" value="Administrador"/>
+                </div>
+                <br/>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="panel panel-default color1">
+                    <ul class="nav color1">
+                        <li class="active color1"> <h:link value="Mi Perfil" /></li>
+                        <li> <h:link value="Mensajeria"/></li>
+                        <li> <h:link value="Ayuda"/></li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+        </div>
+
+    </ui:define>
+</ui:composition>
