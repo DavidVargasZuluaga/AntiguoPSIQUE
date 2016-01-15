@@ -6,10 +6,12 @@ import controlador.util.JsfUtil.PersistAction;
 import fachada.RolFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -27,10 +29,30 @@ public class RolController implements Serializable {
     private fachada.RolFacade ejbFacade;
     private List<Rol> items = null;
     private Rol selected;
+    private Rol aprendiz;
 
-    public RolController() {
+    @PostConstruct
+    public void init(){
+        selected = new Rol();
+        aprendiz = new Rol();
     }
 
+    public Rol getAprendiz() {
+        if (items == null) {
+            items = getFacade().findAll();
+        }
+        for (Rol item : items) {
+            if (item.getIdRol().equals(4)) {
+                aprendiz = item;
+            }
+        }
+        return aprendiz;
+    }
+
+    public void setAprendiz(Rol aprendiz) {
+        this.aprendiz = aprendiz;
+    }
+    
     public Rol getSelected() {
         return selected;
     }

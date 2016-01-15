@@ -1,15 +1,17 @@
 package controlador;
 
-import modelo.Notificacion;
+import modelo.*;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import fachada.NotificacionFacade;
+import fachada.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -24,12 +26,18 @@ import javax.faces.convert.FacesConverter;
 public class NotificacionController implements Serializable {
 
     @EJB
-    private fachada.NotificacionFacade ejbFacade;
+    private NotificacionFacade ejbFacade;
     private List<Notificacion> items = null;
     private Notificacion selected;
-
-    public NotificacionController() {
+    private int numNotifi;
+    private int numMensaje;
+    
+    @PostConstruct
+    public void init(){
+        selected = new Notificacion();
+        items = new ArrayList();
     }
+    
 
     public Notificacion getSelected() {
         return selected;

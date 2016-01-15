@@ -29,7 +29,7 @@ public class UsuarioController implements Serializable {
     private UsuarioFacade ejbFacade;
     private List<Usuario> items = null;
     private Usuario selected;
-    private Usuario usuario = null;
+    private Usuario usuario = null; 
 
     @PostConstruct
     public void init(){
@@ -66,10 +66,9 @@ public class UsuarioController implements Serializable {
             usua = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
             if(usua == null){
                 context.getExternalContext().redirect("./../permisos.xhtml");
-                
             }
         } catch (Exception e) {
-            
+            e.printStackTrace();
         }
     }
     

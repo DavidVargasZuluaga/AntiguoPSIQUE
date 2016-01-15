@@ -9,19 +9,17 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+        <link rel="shortcut icon" type="image/x-icon" href="/resources/img/icono.ico"/>
         
         <h:outputStylesheet library="css" name="cssLayout.css"/>
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
         <h:outputStylesheet library="css" name="estilos.css"/>
         <h:outputStylesheet library="css" name="bootstrap-social.css"/>
         <h:outputStylesheet name="css/font-awesome.css"/>
-
-        <h:outputScript library="js" name="jquery-1.9.1.js" target="head"/>
-        <h:outputScript library="js" name="jquery.validate.js" target="head"/>
-        <h:outputScript library="js" name="additional-methods.js" target="head"/>
-        <h:outputScript library="js" name="bootstrap.min.js" target="head"/>
-
+        
         <title>Plantilla Basica</title>
+        
     </h:head>
 
     <h:body class="marcagua">
@@ -40,34 +38,35 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li><p:link outcome="/index.xhtml" class="botonesnav" value="Volver al inicio"/></li>
+                            <li><p:link outcome="/index.xhtml" class="botonesnav" >Volver al inicio &nbsp; <i class="fa fa-sign-out fa-lg"></i></p:link></li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <h:graphicImage class="imgdere" value="../resources/img/ojo64.png"/>
+                        <ul class="nav navbar-nav navbar-right" style="margin-top: 5px; margin-left: 5px;">
+                            <h:graphicImage class="imgdere" value="/resources/img/ojo64.png"/>
                         </ul>					
                     </div>
                 </div>
             </nav>
         </header>
-        <div class="container color1 ">
-            <div id="content" class="center_content">
-                <ui:insert name="body">Content</ui:insert>
-            </div>
+        <div class="container ">
 
-            <div id="bottom" class="color1 row">
+            <ui:insert name="body"></ui:insert>
+            
+            <div class="color1 row">
                 <div class="centrar container tfooter col-md-12">
                     <hr/>
                     <h4>CopyRigth © 2015 | PSIQUE Todos los derechos reservados
                         <br/>
                         Sistema de Información para el Seguimiento Psicológico del Aprendiz.   
                         <br/>
-                        <small>PSIQUE 1.0</small>
+                        <small>PSIQUE 2.0</small>
                     </h4>
                 </div>
             </div>
-
         </div>
-
+        <h:outputScript library="js" name="jquery-1.9.1.js" target="head"/>
+        <h:outputScript library="js" name="jquery.validate.js" target="head"/>
+        <!--<h:outputScript library="js" name="additional-methods.js" target="head"/>-->
+        <h:outputScript library="js" name="bootstrap.min.js" target="head"/>
+        <h:outputScript library="js" name="calendario.js" target="head"/>
     </h:body>
-
 </html>
