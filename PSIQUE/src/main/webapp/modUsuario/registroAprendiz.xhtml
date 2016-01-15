@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Registro Aprendiz</title>
+
+    </h:head>
+    <ui:composition template="/plantillas/PlantillaBasica.xhtml">
+        <ui:define name="body" >
+            <div class=" row container-fluid trans3">
+                <br/>
+                <br/>
+                <br/>
+                <div class="container-fluid color1">
+                    <div class="col-xs-12 col-sm-1 col-md-2">
+                    </div>
+                    <div class="col-xs-12 col-sm-10 col-md-8">
+                        <h1><i class="fa fa-user-plus"></i> &nbsp; Registro de Aprendiz</h1>
+                        <h3>Llene los siguientes campos para crear una cuenta como aprendiz</h3>
+                        <hr/>
+                        <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-8">
+                            <h:form id="UsuarioCreateForm">
+                                <p:messages autoUpdate="true" showIcon="false" closable="true" />
+                                <p:defaultCommand target="hey"/>
+                                <p:focus context="UsuarioCreateForm"/>
+                                <div class="form-group">
+                                    <h:selectOneMenu id="idRol" value="#{usuarioController.selected.idRol}" >
+                                        <f:selectItem itemValue="#{rolController.aprendiz}" itemLabel="#{rolController.aprendiz.nombre}"/>
+                                        <!--<f:selectItems value="#{rolController.itemsAvailableSelectMany}"
+                                                       var="idRolItem"
+                                                       itemLabel="#{idRolItem.nombre}"/>-->
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Documento de identidad" class="control-label" style="font-weight:bold" for="ide"/>
+                                    <h:inputText converterMessage="Numero de documento invalido" requiredMessage="Documento requerido" id="ide" class="form-control" value="#{usuarioController.selected.idUsuario}" tabindex="1" required="true" />
+                                    <p:watermark for="ide" value="1025754873"  />  
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Correo electronico" class="control-label" style="font-weight:bold" for="correo"/>
+                                    <p:inputText type="email" converterMessage="Correo invalido" requiredMessage="Correo requerido" id="correo" class="form-control" value="#{usuarioController.selected.correo}" tabindex="2" required="true" />
+                                    <p:watermark class="form-control" for="correo" value="ejemplo@misena.edu.co" />    
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Contraseña" class="control-label" style="font-weight:bold" for="clave"/>
+                                    <p:password validatorMessage="Las contraseñas no coinciden" match="clave2" feedback="true" inline="true" converterMessage="Contraseña invalida" requiredMessage="Contraseña requerida" id="clave" class="form-control" value="#{usuarioController.selected.clave}" promptLabel="Digite una contraseña" weakLabel="Seguridad baja" goodLabel="Seguridad buena" strongLabel="Seguridad excelente"  tabindex="3"/>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Repita contraseña" class="control-label" style="font-weight:bold" for="clave2"/>
+                                    <p:password converterMessage="Contraseña invalida" requiredMessage="Contraseña requerida" id="clave2" class="form-control" tabindex="4 "/>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Nombres" class="control-label" style="font-weight:bold" for="nombres"/>
+                                    <h:inputText converterMessage="Nombre invalido" requiredMessage="Nombre requerido" id="nombres" class="form-control" value="#{usuarioController.selected.nombres}" tabindex="6" required="true" />
+                                    <p:watermark class="form-control" for="nombres" value="Juan Carlos" />
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Primer Apellido" class="control-label" style="font-weight:bold" for="pApellido"/>
+                                    <h:inputText converterMessage="Primer apellido invalido" requiredMessage="Primer apellido requerido" id="pApellido" class="form-control" value="#{usuarioController.selected.primerApellido}" tabindex="7" required="true" />
+                                    <p:watermark class="form-control" for="pApellido" value="Perez" />
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Segundo Apellido" class="control-label" style="font-weight:bold" for="sApellido"/>
+                                    <h:inputText converterMessage="Segundo apellido invalido" requiredMessage="Segunto apellido requerido" id="sApellido" class="form-control" value="#{usuarioController.selected.segundoApellido}" tabindex="8" required="true" />
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Fecha de nacimiento" class="control-label" style="font-weight:bold" for="fechaNa"/>
+                                    <br/>
+                                    <p:calendar locale="es" title="Ejemplo 20-05-1995" navigator="true" pattern="dd-MM-yyyy" mask="true" converterMessage="Formato de fecha de nacimiento invalido" requiredMessage="Fecha de nacimiento requerida" id="fechaNa" value="#{usuarioController.selected.fechaNacimiento}" tabindex="9" required="true" />
+                                    <h:outputLabel value=" &nbsp; Ejemplo : 14-05-1992" class="control-label" for="fechaNa"/>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Numero de celular o telefono" class="control-label" style="font-weight:bold" for="telefono"/>
+                                    <p:inputText converterMessage="Telefono invalido" requiredMessage="Telefono requerido" id="telefono" class="form-control" value="#{usuarioController.selected.telefono}" tabindex="10" required="true" />
+                                    <p:watermark class="form-control" for="telefono" value="3223837646  o  4067839" />
+                                </div>
+                                <br/>
+                                <div class="form-group col-xs-6 col-sm-6 col-md-6">
+                                    <h:commandButton id="hey" class="btn btn-block botones" actionListener="#{usuarioController.create}" value="Crear Aprendiz" />
+                                </div>
+                            </h:form>
+                            
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

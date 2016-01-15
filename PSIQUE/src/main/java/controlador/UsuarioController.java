@@ -6,6 +6,7 @@ import controlador.util.JsfUtil.PersistAction;
 import fachada.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,53 +30,61 @@ public class UsuarioController implements Serializable {
     private UsuarioFacade ejbFacade;
     private List<Usuario> items = null;
     private Usuario selected;
-    private Usuario usuario = null; 
+    private Usuario usuario = null;
+    private List<Usuario> listaAprendices = null;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         selected = new Usuario();
         usuario = new Usuario();
     }
-    
-    public String autenticar(){
+
+    public String autenticar() {
         Usuario us;
-        String res=null;
+        String res = null;
         try {
             us = ejbFacade.autenticar(usuario);
-            this.usuario = us ;
-            if(us!=null){
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",us);
-                if(us.getIdRol().getIdRol()==1){
+            this.usuario = us;
+            if (us != null) {
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
+                if (us.getIdRol().getIdRol() == 1) {
                     res = "modUsuario/principalAdmon.xhtml";
-                }else{
+                } else {
                     res = "modUsuario/principalUsuario.xhtml";
                 }
-            }else{
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Credenciales incorrectos","Intentelo de nuevo"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Credenciales incorrectos", "Intentelo de nuevo"));
             }
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Alerta","Error de validacion"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Alerta", "Error de validacion"));
         }
         return res;
     }
-    
-    public void verificarSesion(){
+
+    public void verificarSesion() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
-            Usuario usua ;
+            Usuario usua;
             usua = (Usuario) context.getExternalContext().getSessionMap().get("usuario");
-            if(usua == null){
+            if (usua == null) {
                 context.getExternalContext().redirect("./../permisos.xhtml");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-     public Usuario getUsuario() {
-         if(usuario==null){
-             usuario = new Usuario();
-         }
+
+    public List<Usuario> getListaAprendices() {
+        if(listaAprendices==null){
+            listaAprendices = ejbFacade.listaAprendices();
+        }
+        return listaAprendices;
+    }
+
+    public Usuario getUsuario() {
+        if (usuario == null) {
+            usuario = new Usuario();
+        }
         return usuario;
     }
 
@@ -173,8 +182,6 @@ public class UsuarioController implements Serializable {
         return getFacade().findAll();
     }
 
-   
-    
     @FacesConverter(forClass = Usuario.class)
     public static class UsuarioControllerConverter implements Converter {
 

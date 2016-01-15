@@ -49,4 +49,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         return usuario;
     }
     
+    public List<Usuario> listaAprendices(){
+        String consulta;
+        List<Usuario> listar = null;
+        Usuario us = null;
+        List<Usuario> lista= null;
+        try {
+            consulta="FROM Usuario u, Aprendiz a WHERE a.idAprendiz = u.idUsuario";
+            Query q = em.createQuery(consulta);
+            lista = q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
 }
